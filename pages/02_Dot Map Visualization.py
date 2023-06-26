@@ -1,6 +1,6 @@
-import matplotlib.pyplot as plt
 import streamlit as st
-import plotly.graph_objects as go
+from streamlit_folium import st_folium
+import folium
 import common
 
 common.page_config()
