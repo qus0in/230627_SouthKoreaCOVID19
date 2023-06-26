@@ -20,7 +20,7 @@ for idx, row in data.iterrows():
     # CircleMarker를 사용하여 버블맵 표현
     folium.CircleMarker(
         location=[lat, lon],
-        radius=confirmed_cases/1000,
+        radius=confirmed_cases/500,
         color='red',
         fill=True,
         fill_color='red',
