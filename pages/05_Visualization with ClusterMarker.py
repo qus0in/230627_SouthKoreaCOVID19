@@ -1,30 +1,29 @@
 import streamlit as st
 from streamlit_folium import st_folium
 import folium
+from folium.plugins import MarkerCluster
 import common
 
 common.page_config()
 
-st.title("Choropleth Map Visualization")
+st.title("Visualization with ClusterMarker")
 
 data = common.get_sales()
 
 # 지도 초기화
 map_korea = folium.Map(location=[36.5, 127.5], zoom_start=7)
 
+# 클러스터링을 위한 MarkerCluster 객체 생성
+marker_cluster = MarkerCluster().add_to(map_korea)
+
 # 데이터 시각화
-folium.Choropleth(
-    # https://github.com/southkorea/southkorea-maps/blob/master/kostat/2013/json/skorea_municipalities_geo_simple.json
-    geo_data="https://raw.githubusercontent.com/southkorea/southkorea-maps/master/kostat/2013/json/skorea_municipalities_geo_simple.json",
-    name='choropleth',
-    data=data,
-    columns=['city', 'confirmed'],
-    key_on='feature.properties.name_eng',
-    fill_color='YlOrRd',
-    fill_opacity=0.7,
-    line_opacity=0.2,
-    legend_name='Confirmed Cases'
-).add_to(map_korea)
+for idx, row in data.iterrows():
+    lat, lon = row['latitude'], row['longitude']
+    
+    # MarkerCluster에 Marker 추가
+    folium.Marker(
+        location=[lat, lon]
+    ).add_to(marker_cluster)
 
 # https://github.com/randyzwitch/streamlit-folium/blob/master/examples/streamlit_app.py
 # 지도 출력
