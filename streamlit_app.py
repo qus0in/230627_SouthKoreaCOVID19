@@ -11,3 +11,5 @@ st.caption("""
 이 데이터는 지역별로 구분되어 있으며, 시간에 따라 업데이트됩니다.
 """)
 st.image("img/welcome.png")
+
+st.write("[Data](./Data)")
