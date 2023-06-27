@@ -12,4 +12,4 @@ st.caption("""
 """)
 st.image("img/welcome.png")
 
-st.write("[Data](./Data)")
+st.write("[Data](/Data)")
